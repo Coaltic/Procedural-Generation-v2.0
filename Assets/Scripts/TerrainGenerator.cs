@@ -10,10 +10,10 @@ public class TerrainGenerator : MonoBehaviour
     public List<GameObject> cubes = new List<GameObject>();
     //public GameObject[] cubes;
 
-    const int chunkSize = 128;
+    public int chunkSize = 16;
     const float scale = 20f;
-    public float offsetX = 100f;
-    public float offsetZ = 100f;
+    public float offsetX;
+    public float offsetZ;
 
     public float y;
 
@@ -31,30 +31,31 @@ public class TerrainGenerator : MonoBehaviour
 
     public void GenerateChunk(int a, int b)
     {
-        offsetX = Random.Range(0f, 99999f);
-        offsetZ = Random.Range(0f, 99999f);
 
-        for (int x = 0; x <= chunkSize; x++)
-            for (int z = 0; z <= chunkSize; z++)
+        for (int x = 0 + (a * chunkSize); x <= chunkSize + (a * chunkSize); x++)
+        {
+            for (int z = 0 + (b * chunkSize); z <= chunkSize + (b * chunkSize); z++)
             {
                 float y = CalculateHeight(x, z);
-                GameObject newCube = Instantiate(grass, new Vector3(x + (a * chunkSize), Mathf.RoundToInt(y * scale), z + (b * chunkSize)), Quaternion.identity);
+                GameObject newCube = Instantiate(grass, new Vector3(x, (Mathf.RoundToInt(y * scale)) + 5, z), Quaternion.identity);
                 cubes.Add(newCube);
 
-                y = Mathf.RoundToInt(y * scale);
-                //while (y >= 0)
-                //{
-                y--;
-                newCube = Instantiate(dirt, new Vector3(x + (a * chunkSize), y, z + (b * chunkSize)), Quaternion.identity);
-                newCube.transform.localScale = new Vector3(1, y, 1);
-                newCube.transform.position = new Vector3(x, (y / 2) + 0.5f, z);
-                cubes.Add(newCube);
-                    
-                //}
+                y = Mathf.RoundToInt(y * scale) + 5;
+                while (y >= 0)
+                {
+                    y--;
+                    newCube = Instantiate(dirt, new Vector3(x, y, z), Quaternion.identity);
+                    //newCube.transform.localScale = new Vector3(1, y, 1);
+                    //newCube.transform.position = new Vector3(x, (y / 2) + 0.5f, z);
+                    cubes.Add(newCube);
 
+                }
 
-                //Mathf.RoundToInt(y)
+                
             }
+
+           
+        }
     }
 
     public float CalculateHeight(int x, int z)

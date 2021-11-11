@@ -5,13 +5,13 @@ using UnityEngine;
 public class ChunkGenerator : MonoBehaviour
 {
     public TerrainGenerator terrainGenerator;
-
+    public Generator generator;
 
 
     void Start()
     {
         GenerateMap();
-
+        generator.GenerateCaves();
         //terrainGenerator.GenerateChunk(0, 0);
     }
 
@@ -21,6 +21,7 @@ public class ChunkGenerator : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GenerateMap();
+            generator.GenerateCaves();
         }
     }
 
@@ -33,8 +34,8 @@ public class ChunkGenerator : MonoBehaviour
 
         terrainGenerator.cubes.Clear();
 
-        for (int x = 0; x <= 0; x++)
-            for (int y = 0; y <= 0; y++)
+        for (int x = 0; x <= 3; x++)
+            for (int y = 0; y <= 3; y++)
             {
                 terrainGenerator.GenerateChunk(x, y);
             }
