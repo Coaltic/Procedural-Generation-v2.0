@@ -7,14 +7,16 @@ public class Generator : MonoBehaviour
     public TerrainGenerator terrainGenerator;
 
 
-    public GameObject cube;
+    //public GameObject cube;
     //public List<GameObject> cubes = new List<GameObject>();
 
-    public float perlinDivision;
-    public float noiseScale = 0.5f;
+    public float perlinDivision = 6;
+    public float noiseScale = 0.125f;
+
+    public float offset;
     void Start()
     {
-        //GenerateMap();
+
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class Generator : MonoBehaviour
 
     public void GenerateCaves()
     {
+
         foreach (GameObject newCube in terrainGenerator.cubes)
         {
             //Debug.Log(Perlin3D(newCube.transform.position.x * noiseScale, newCube.transform.position.y * noiseScale, newCube.transform.position.z * noiseScale));
@@ -45,23 +48,6 @@ public class Generator : MonoBehaviour
 
         }
 
-        //cubes.Clear();
-
-        /*for (int x = 0; x < terrainGenerator.chunkSize; x++)
-        {
-            for (int y = 0; y < terrainGenerator.chunkSize; y++)
-            {
-                for (int z = 0; z < terrainGenerator.chunkSize; z++)
-                {
-                    if (Perlin3D(x * noiseScale, y * noiseScale, z * noiseScale) >= 0.5f)
-                    {
-                        Destroy(newCube);
-                        //GameObject newCube = Instantiate(cube, new Vector3(x, y, z), Quaternion.identity);
-                        //cubes.Add(newCube);
-                    }
-                }
-            }
-        }*/
     }
 
     public float Perlin3D(float x, float y, float z)

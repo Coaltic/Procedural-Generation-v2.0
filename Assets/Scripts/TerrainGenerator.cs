@@ -8,6 +8,8 @@ public class TerrainGenerator : MonoBehaviour
     public GameObject dirt;
 
     public List<GameObject> cubes = new List<GameObject>();
+    //public List<GameObject> stone = new List<GameObject>();
+
     //public GameObject[] cubes;
 
     public int chunkSize = 16;
@@ -16,6 +18,7 @@ public class TerrainGenerator : MonoBehaviour
     public float offsetZ;
 
     public float y;
+    const int heightLimit = 10;
 
     void Start()
     {
@@ -31,16 +34,17 @@ public class TerrainGenerator : MonoBehaviour
 
     public void GenerateChunk(int a, int b)
     {
+        
 
         for (int x = 0 + (a * chunkSize); x <= chunkSize + (a * chunkSize); x++)
         {
             for (int z = 0 + (b * chunkSize); z <= chunkSize + (b * chunkSize); z++)
             {
                 float y = CalculateHeight(x, z);
-                GameObject newCube = Instantiate(grass, new Vector3(x, (Mathf.RoundToInt(y * scale)) + 5, z), Quaternion.identity);
+                GameObject newCube = Instantiate(grass, new Vector3(x, (Mathf.RoundToInt(y * scale)) + heightLimit, z), Quaternion.identity);
                 cubes.Add(newCube);
 
-                y = Mathf.RoundToInt(y * scale) + 5;
+                y = Mathf.RoundToInt(y * scale) + heightLimit;
                 while (y >= 0)
                 {
                     y--;
@@ -56,6 +60,12 @@ public class TerrainGenerator : MonoBehaviour
 
            
         }
+    }
+
+    public void GenerateOffset()
+    {
+        offsetX = Random.Range(0f, 99999f);
+        offsetZ = Random.Range(0f, 99999f);
     }
 
     public float CalculateHeight(int x, int z)

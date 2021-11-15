@@ -10,9 +10,10 @@ public class ChunkGenerator : MonoBehaviour
 
     void Start()
     {
+        terrainGenerator.GenerateOffset();
         GenerateMap();
         generator.GenerateCaves();
-        //terrainGenerator.GenerateChunk(0, 0);
+
     }
 
     // Update is called once per frame
@@ -20,6 +21,7 @@ public class ChunkGenerator : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            terrainGenerator.GenerateOffset();
             GenerateMap();
             generator.GenerateCaves();
         }
@@ -31,11 +33,16 @@ public class ChunkGenerator : MonoBehaviour
         {
             Destroy(newCube);
         }
+        /*foreach (GameObject newCube in terrainGenerator.stone)
+        {
+            Destroy(newCube);
+        }*/
 
         terrainGenerator.cubes.Clear();
+        //terrainGenerator.stone.Clear();
 
-        for (int x = 0; x <= 3; x++)
-            for (int y = 0; y <= 3; y++)
+        for (int x = 0; x <= 4; x++)
+            for (int y = 0; y <= 4; y++)
             {
                 terrainGenerator.GenerateChunk(x, y);
             }
