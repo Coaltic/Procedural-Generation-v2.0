@@ -5,14 +5,14 @@ using UnityEngine;
 public class ChunkGenerator : MonoBehaviour
 {
     public TerrainGenerator terrainGenerator;
-    public Generator generator;
+    public CaveGenerator caveGenerator;
 
 
     void Start()
     {
         terrainGenerator.GenerateOffset();
         GenerateMap();
-        generator.GenerateCaves();
+        caveGenerator.GenerateCaves();
 
     }
 
@@ -23,7 +23,7 @@ public class ChunkGenerator : MonoBehaviour
         {
             terrainGenerator.GenerateOffset();
             GenerateMap();
-            generator.GenerateCaves();
+            caveGenerator.GenerateCaves();
         }
     }
 
