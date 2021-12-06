@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 1877889701}
-  generator: {fileID: 1197602063}
+  caveGenerator: {fileID: 1197602063}
 --- !u!4 &155321255
 Transform:
   m_ObjectHideFlags: 0
